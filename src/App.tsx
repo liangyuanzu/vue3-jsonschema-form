@@ -129,8 +129,8 @@ export default defineComponent({
           <div class={classes.menu}>
             <h1>Vue3 JsonSchema Form</h1>
             <div>
-              {demos.map((demo, index) => {
-                ;<button
+              {demos.map((demo, index) => (
+                <button
                   class={{
                     [classes.menuButton]: true,
                     [classes.menuSelected]: index === selected
@@ -139,7 +139,7 @@ export default defineComponent({
                 >
                   {demo.name}
                 </button>
-              })}
+              ))}
             </div>
           </div>
           <div class={classes.content}>
@@ -168,6 +168,7 @@ export default defineComponent({
             <div class={classes.form}>
               <SchemaFrom
                 schema={demo.schema}
+                rootSchema={demo.schema}
                 value={demo.data}
                 onChange={handleChange}
               />

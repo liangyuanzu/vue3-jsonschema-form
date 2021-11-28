@@ -17,7 +17,10 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/script-setup-uses-vars': 'off',
-    '@typescript-eslint/no-var-requires': 'off'
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    'no-prototype-builtins': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   overrides: [
     {

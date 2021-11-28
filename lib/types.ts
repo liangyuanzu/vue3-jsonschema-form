@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import { DefineComponent, PropType } from 'vue'
 
 export enum SchemaTypes {
   'NUMBER' = 'number',
@@ -11,13 +11,40 @@ export enum SchemaTypes {
 
 type SchemaRef = { $ref: string }
 
+export interface UISchema extends VueJsonSchemaConfig {
+  properties?: {
+    [property: string]: UISchema
+  }
+}
+
+export interface VueJsonSchemaConfig {
+  title?: string
+  descrription?: string
+  component?: string
+  options?: {
+    [key: string]: any
+  }
+  withFormItem?: boolean
+  widget?: 'checkbox' | 'textarea' | 'select' | 'radio' | 'range' | string
+  items?: UISchema | UISchema[]
+  propertiesOrder?: string[]
+  controls?: {
+    sortable?: boolean
+    removeable?: boolean
+    addable?: boolean
+  }
+}
+
 export interface Schema {
   type?: SchemaTypes | string
   const?: any
   format?: string
+
+  title?: string
   default?: any
+
   properties?: {
-    [key: string]: Schema | { $ref: string }
+    [key: string]: Schema
   }
   items?: Schema | Schema[] | SchemaRef
   uniqueItems?: any
@@ -25,16 +52,31 @@ export interface Schema {
     [key: string]: string[] | Schema | SchemaRef
   }
   oneOf?: Schema[]
-  // vjsf?: VueJsonSchemaConfig
+  anyOf?: Schema[]
+  allOf?: Schema[]
+  vjsf?: VueJsonSchemaConfig
   required?: string[]
   enum?: any[]
+  enumNames?: any[]
   enumKeyValue?: any[]
   additionalProperties?: any
   additionalItems?: Schema
+
+  minLength?: number
+  maxLength?: number
+  minimun?: number
+  maximum?: number
+  multipleOf?: number
+  exclusiveMaximum?: number
+  exclusiveMinimum?: number
 }
 
 export const FieldPropsDefine = {
   schema: {
+    type: Object as PropType<Schema>,
+    required: true
+  },
+  rootSchema: {
     type: Object as PropType<Schema>,
     required: true
   },
@@ -46,3 +88,5 @@ export const FieldPropsDefine = {
     required: true
   }
 } as const
+
+export type CommonFieldType = DefineComponent<typeof FieldPropsDefine>

@@ -11,7 +11,6 @@ export default defineComponent({
 
   setup(props) {
     const handleChange = (e: any) => {
-      console.log(e)
       props.onChange(e.target.value)
     }
 
