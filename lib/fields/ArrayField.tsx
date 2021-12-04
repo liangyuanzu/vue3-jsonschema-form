@@ -1,8 +1,8 @@
 import { defineComponent, PropType } from 'vue'
 import { createUseStyles } from 'vue-jss'
 import { useVjsContext } from '../context'
-import { FieldPropsDefine, Schema } from '../types'
-import SelectionWidget from '../widgets/Selection'
+import { getWidget } from '../theme'
+import { FieldPropsDefine, Schema, SelectionWidgetNames } from '../types'
 
 const useStyles = createUseStyles({
   container: {
@@ -87,6 +87,7 @@ export default defineComponent({
 
   setup(props) {
     const context = useVjsContext()
+    const SelectionWidgetRef = getWidget(SelectionWidgetNames.SelectionWidget)
 
     const handleArrayItemChange = (v: any, i: number) => {
       const { value } = props
@@ -129,6 +130,8 @@ export default defineComponent({
 
     return () => {
       const { SchemaItem } = context
+      const SelectionWidget = SelectionWidgetRef.value
+
       const { schema, rootSchema, value } = props
 
       const isMultiType = Array.isArray(schema.items)
