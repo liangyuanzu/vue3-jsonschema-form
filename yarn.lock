@@ -1329,6 +1329,13 @@
   resolved "https://registry.npmmirror.com/@types/jsonpointer/download/@types/jsonpointer-4.0.0.tgz#84c3a6f81a822412c73942fd95a335171ffd9268"
   integrity sha1-hMOm+BqCJBLHOUL9laM1Fx/9kmg=
 
+"@types/lodash.topath@^4.5.6":
+  version "4.5.6"
+  resolved "https://registry.npmmirror.com/@types/lodash.topath/download/@types/lodash.topath-4.5.6.tgz#4b0ea9136afede167e0cbfc74abb7d95f5dc13e1"
+  integrity sha1-Sw6pE2r+3hZ+DL/HSrt9lfXcE+E=
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.union@^4.6.6":
   version "4.6.6"
   resolved "https://registry.npmmirror.com/@types/lodash.union/download/@types/lodash.union-4.6.6.tgz#2f77f2088326ed147819e9e384182b99aae8d4b0"
@@ -7402,6 +7409,11 @@ lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
+
+lodash.topath@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.npmmirror.com/lodash.topath/download/lodash.topath-4.5.2.tgz#3616351f3bba61994a0931989660bd03254fd009"
+  integrity sha1-NhY1Hzu6YZlKCTGYlmC9AyVP0Ak=
 
 lodash.transform@^4.6.0:
   version "4.6.0"

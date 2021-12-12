@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { defineComponent, ref, onMounted, watch, onBeforeUnmount, shallowRef } from 'vue'
-
 import * as Monaco from 'monaco-editor'
-
 import type { PropType } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 import { createUseStyles } from 'vue-jss'
 
 const useStyles = createUseStyles({
@@ -59,7 +57,6 @@ export default defineComponent({
       })
 
       _subscription = editor.onDidChangeModelContent((event) => {
-        console.log('--------->', __prevent_trigger_change_event)
         if (!__prevent_trigger_change_event) {
           props.onChange(editor.getValue(), event);
         }

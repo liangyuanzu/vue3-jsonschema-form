@@ -132,7 +132,7 @@ export default defineComponent({
       const { SchemaItem } = context
       const SelectionWidget = SelectionWidgetRef.value
 
-      const { schema, rootSchema, value } = props
+      const { schema, rootSchema, errorSchema, value } = props
 
       const isMultiType = Array.isArray(schema.items)
       const isSelect = schema.items && (schema.items as any).enum
@@ -145,6 +145,7 @@ export default defineComponent({
           <SchemaItem
             schema={s}
             rootSchema={rootSchema}
+            errorSchema={errorSchema[i] ?? {}}
             value={arr[i]}
             key={i}
             onChange={(v: any) => handleArrayItemChange(v, i)}
@@ -165,6 +166,7 @@ export default defineComponent({
             <SchemaItem
               schema={schema.items as Schema}
               rootSchema={rootSchema}
+              errorSchema={errorSchema[index] ?? {}}
               value={v}
               onChange={(v: any) => handleArrayItemChange(v, index)}
             />
@@ -175,9 +177,11 @@ export default defineComponent({
         const options = enumOptions.map((e: any) => ({ key: e, value: e }))
         return (
           <SelectionWidget
-            onChange={props.onChange}
             value={props.value}
             options={options}
+            errors={errorSchema.__errors}
+            schema={schema}
+            onChange={props.onChange}
           />
         )
       }
