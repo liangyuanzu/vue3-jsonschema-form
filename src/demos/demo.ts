@@ -1,17 +1,25 @@
+import PasswordWidget from '@/components/PasswordWidget'
+
 export default {
   name: 'Demo',
   schema: {
     type: 'object',
     properties: {
       pass1: {
+        title: 'password',
         type: 'string',
-        minLength: 10,
-        title: 'password'
+        // minLength: 10
+        test: true
       },
       pass2: {
+        title: 're try password',
         type: 'string',
-        minLength: 10,
-        title: 're try password'
+        minLength: 10
+      },
+      color: {
+        title: 'Input Color',
+        type: 'string',
+        format: 'color'
       }
     }
   },
@@ -25,6 +33,15 @@ export default {
       }, 2000)
     })
   },
-  uiSchema: {},
+  uiSchema: {
+    properties: {
+      pass1: {
+        widget: PasswordWidget
+      },
+      pass2: {
+        color: 'red'
+      }
+    }
+  },
   default: 1
 }

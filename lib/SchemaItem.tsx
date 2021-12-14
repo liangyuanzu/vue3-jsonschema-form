@@ -1,4 +1,5 @@
 import { computed, defineComponent } from 'vue'
+import { useVjsContext } from './context'
 import ArrayField from './fields/ArrayField'
 import NumberField from './fields/NumberField'
 import ObjectField from './fields/ObjectField'
@@ -11,9 +12,13 @@ export default defineComponent({
   props: FieldPropsDefine,
 
   setup(props) {
+    const formContext = useVjsContext()
+
     const retrieveSchemaRef = computed(() => {
       const { schema, rootSchema, value } = props
-      return retrieveSchema(schema, rootSchema, value)
+      return formContext.transformSchemaRef.value(
+        retrieveSchema(schema, rootSchema, value)
+      )
     })
 
     return () => {

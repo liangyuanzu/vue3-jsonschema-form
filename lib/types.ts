@@ -1,3 +1,4 @@
+import { CompilationContext, FormatDefinition } from 'ajv'
 import { DefineComponent, PropType } from 'vue'
 import { ErrorSchema } from './validator'
 
@@ -12,10 +13,14 @@ export enum SchemaTypes {
 
 type SchemaRef = { $ref: string }
 
-export interface UISchema extends VueJsonSchemaConfig {
+export type UISchema = {
+  widget?: string | CommonWidgetDefine
   properties?: {
-    [property: string]: UISchema
+    [key: string]: UISchema
   }
+  items?: UISchema | UISchema[]
+} & {
+  [key: string]: any
 }
 
 export interface VueJsonSchemaConfig {
@@ -81,6 +86,10 @@ export const FieldPropsDefine = {
     type: Object as PropType<Schema>,
     required: true
   },
+  uiSchema: {
+    type: Object as PropType<UISchema>,
+    required: true
+  },
   errorSchema: {
     type: Object as PropType<ErrorSchema>,
     required: true
@@ -104,6 +113,9 @@ export const CommonWidgetPropsDefine = {
   schema: {
     type: Object as PropType<Schema>,
     required: true
+  },
+  options: {
+    type: Object as PropType<{ [key: string]: any }>
   },
   onChange: {
     type: Function as PropType<(v: any) => void>,
@@ -151,4 +163,36 @@ export interface Theme {
     [CommonWidgetNames.TextWidget]: CommonWidgetDefine
     [CommonWidgetNames.NumberWidget]: CommonWidgetDefine
   }
+}
+
+export interface CustomFormat {
+  name: string
+  definition: FormatDefinition
+  component: CommonWidgetDefine
+}
+
+interface VjsfKeywordDefinition {
+  type?: string | Array<string>
+  async?: boolean
+  $data?: boolean
+  errors?: boolean | string
+  metaSchema?: object
+  // schema: false makes validate not to expect schema (ValidateFunction)
+  schema?: boolean
+  statements?: boolean
+  dependencies?: Array<string>
+  modifying?: boolean
+  valid?: boolean
+  // one and only one of the following properties should be present
+  macro: (
+    schema: any,
+    parentSchema: object,
+    it: CompilationContext
+  ) => object | boolean
+}
+
+export interface CustomKeyword {
+  name: string
+  definition: VjsfKeywordDefinition
+  transformSchema: (originSchema: Schema) => Schema
 }

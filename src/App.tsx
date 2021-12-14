@@ -4,6 +4,8 @@ import SchemaFrom, { ThemeProvider } from '../lib'
 import themeDefault from '../lib/theme-default'
 import MonacoEditor from './components/MonacoEditor'
 import demos from './demos'
+import customFormat from './plugins/customFormat'
+import customKeyword from './plugins/customKeyword'
 
 // TODO: 在 lib 中 export
 type Schema = any
@@ -99,7 +101,6 @@ export default defineComponent({
       demo.uiSchemaCode = toJson(d.uiSchema)
       demo.customValidate = d.customValidate
     })
-    const methodRef: Ref<any> = ref()
 
     const classesRef = useStyles()
 
@@ -180,8 +181,11 @@ export default defineComponent({
                 <SchemaFrom
                   ref={schemaFromRef}
                   schema={demo.schema}
+                  uiSchema={demo.uiSchema || {}}
                   value={demo.data}
                   customValidate={demo.customValidate}
+                  customFormats={customFormat}
+                  customKeywords={customKeyword}
                   onChange={handleChange}
                 />
               </ThemeProvider>
