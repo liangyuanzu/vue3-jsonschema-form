@@ -1,15 +1,13 @@
 import { mount } from '@vue/test-utils'
-import JsonSchemaForm, { NumberField } from '../../lib'
+import { NumberField } from '../../lib'
+import TestComponent from './utils/TestComponent'
 
 describe('JsonSchemaForm', () => {
-  it('should render correct number field', async () => {
+  it('should render correct number field', () => {
     let value = ''
-    const wrapper = mount(JsonSchemaForm, {
+    const wrapper = mount(TestComponent, {
       props: {
         schema: {
-          type: 'number'
-        },
-        rootSchema: {
           type: 'number'
         },
         value: value,
@@ -21,7 +19,6 @@ describe('JsonSchemaForm', () => {
 
     const numberField = wrapper.findComponent(NumberField)
     expect(numberField.exists()).toBeTruthy()
-    // await numberField.props('onChange')('123')
     const input = numberField.find('input')
     input.element.value = '123'
     input.trigger('input')

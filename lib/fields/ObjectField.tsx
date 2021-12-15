@@ -1,6 +1,5 @@
 import { defineComponent } from 'vue'
 import { useVjsContext } from '../context'
-// import SchemaItem from '../SchemaItem'
 import { FieldPropsDefine } from '../types'
 import { isObject } from '../utils'
 
