@@ -1,7 +1,7 @@
 {
-  "name": "vue3-json-schema-form",
+  "name": "v3jsf",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build:core": "TYPE=lib vue-cli-service build --target lib --name index --no-clean lib/index.ts",
@@ -9,8 +9,16 @@
     "build": "rimraf dist && yarn build:core && yarn build:theme",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:cov": "vue-cli-service test:unit --coverage",
+    "prepublishOnly": "npm run build",
     "lint": "vue-cli-service lint"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "fils": [
+    "dist"
+  ],
+  "main": "dist/index.common.js",
   "dependencies": {
     "ajv": "6.12.3",
     "ajv-errors": "1.0.1",
